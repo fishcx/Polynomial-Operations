@@ -1,0 +1,384 @@
+<script>
+	$(document).ready(function() {
+    
+    $('.changeItem').change(function(){
+        $('#generate').click();
+    });
+
+    $(document).keypress(function (e) {
+        var key = e.which;
+         if(key == 13)  // the enter key code
+         {
+            $('#generate').click();
+             return false;  
+          }
+    });
+    
+    $('#video-button').hide();
+    
+    var testing = false;
+    $('#generate').click(function(){
+
+        var type;
+        // handles the formatting for selecting any type
+        if($("#type").val()=="any"){type = random(1,6);}
+        else{type = parseInt($("#type").val())}
+
+        if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
+        generate(type);       
+     });
+
+
+    $("#show-answer").click(function(){
+       if($("#answer").is(":hidden") ){
+          $("#answer").show();
+          $("#show-answer").val("Hide Answer");
+       } else{
+         $("#answer").hide();
+         $("#show-answer").val("Show Answer");
+        }
+    });
+    
+    if(testing){ $("#answer").show();}
+    
+	});
+	function generate(type){
+       
+       
+       
+       var output = "";
+       var answer = "";
+       var answer1 = "";
+       var answer2 = "";
+       var diffOfTwoSquares = false;
+       var a,b,c,d,e,f,g,h,x,i,j,k,l; 
+       $("#generatedoutput").html("");
+       $("#answer").html("");
+       
+       switch(type) {
+           // Adding and Subtracting
+           case 1: 
+           
+              a = non_zero_random(-10,10);
+              b = non_zero_random(-10,10);
+              c = non_zero_random(-10,10);
+              d = non_zero_random(-10,10);
+              e = non_zero_random(-10,10);
+              f = non_zero_random(-10,10);
+              g = non_zero_random(-10,10);
+              h = non_zero_random(-10,10);
+           
+           switch(random(0,1)){
+              
+              // adding trinomials
+              case 0:
+              output = "("+mix([a+"x^2",b + "x",c])+") + ("+mix([d+"x^2",e + "x",f])+")";
+              answer = (a+d)+"x^2 + "+(b+e)+"x  + "+(c+f);
+              break;
+              
+              // subtracting trinomials
+              case 1:
+              output = "("+mix([a+"x^2",b + "x",c])+") - ("+mix([d+"x^2",e + "x",f])+")";
+              answer = (a-d)+"x^2 + "+(b-e)+"x  + "+(c-f);
+              break;
+              
+           }
+           output = "\\("+clean(output)+"\\)";
+           answer = "\\("+clean(simplifyExpression(answer))+"\\)";
+           break;
+           
+           // Multiplying
+           case 2:
+              
+              a = non_zero_random(-10,10);
+              b = non_zero_random(-10,10);
+              c = non_zero_random(-10,10);
+              d = non_zero_random(-10,10);
+              e = random(2,9);
+              do{f = random(2,9);}while(e == f);
+              do{g = random(2,9);}while(g ==f || g == e);
+              do{h = random(2,9);}while(h == g || h == e || h == f);
+              
+              switch(random(0,3)){
+              
+              // 1 x 1
+              case 0: 
+              
+              output = "("+a+"x^"+e+")("+b+"x^"+f+")";
+              answer = (a*b)+"x^{"+(e+f)+"}";
+              
+              break;
+              
+              // 1 x 2
+              case 1: 
+              
+              output = "("+a+"x^"+e+")("+b+"x^"+f+" + "+c+"x^"+g+")"; 
+              answer = (a*b)+"x^{"+(e+f)+"} + "+(a*c)+"x^{"+(e+g)+"}";
+              
+              break;
+              
+              // 1 x 3
+              case 2: 
+              
+              output = "("+a+"x^"+e+")("+b+"x^"+f+" + "+c+"x^"+g+" + "+d+"x^"+h+")";
+              answer = (a*b)+"x^{"+(e+f)+"} + "+(a*c)+"x^{"+(e+g)+"} + "+(a*d)+"x^{"+(e+h)+"}";
+              
+              break;
+              
+              // 2 x 2
+              case 3: 
+              output = "("+mix([a+"x",b])+")";
+              output+= "("+mix([c+"x",d])+")";
+              
+              e = b*c+d*a;
+              answer = (a*c)+"x^2 + "+e+"x  + "+(b*d);
+              break;
+
+           }
+           output = "\\("+clean(output)+"\\)";
+           answer = "\\("+clean(answer)+"\\)";   
+           break;
+		   
+           // Dividing
+           case 3: 
+              
+              switch(random(0,1)){
+              
+              case 0:
+              a = non_zero_random(-10,10);
+              b = non_zero_random(-10,10);
+              c = non_zero_random(-10,10);
+              d = non_zero_random(-10,10);
+              e = random(2,9);
+              do{f = random(2,9);}while(e == f);
+              do{g = random(2,9);}while(g ==f || g == e);
+              do{h = random(2,9);}while(h == g || h == e || h == f);
+              
+              output = "("+(a*b)+"x^{"+(e+f)+"} + "+(a*c)+"x^{"+(e+g)+"} + "+(a*d)+"x^{"+(e+h)+"})÷("+a+"x^"+e+")";
+              answer = b+"x^"+f+" + "+c+"x^"+g+" + "+d+"x^"+h;
+              
+              answer = "\\("+clean(answer)+"\\)";
+              break;
+              
+              case 1:
+              a = non_zero_random(-10,10);
+              b = non_zero_random(-10,10);
+              c = non_zero_random(-10,10);
+              d = non_zero_random(-10,10);
+              e = random(2,9);
+              do{f = random(2,9);}while(e == f);
+              do{g = random(2,9);}while(g ==f || g == e);
+              do{h = random(2,9);}while(h == g || h == e || h == f);
+              
+              output = "\\cfrac{"+a*b+"x^{"+(e+f)+"} + "+a*c+"x^{"+(e+g)+"} + "+a*d+"x^{"+(e+h)+"}}{"+a+"x^"+e+"}";
+              answer = b+"x^"+f+" + "+c+"x^"+g+" + "+d+"x^"+h;
+              
+              answer = "\\("+clean(answer)+"\\)";
+              break;
+              
+              
+              }
+           output = "\\("+clean(output)+"\\)";   
+           break;
+		   
+           
+           // Factoring GCF
+           case 4: 
+              switch(random(0,2)){
+        
+              // binomial
+              case 0: 
+              a = random(2,20); b = random(2,20);
+              c = gcd(a,b);
+              
+              d = random(2,9); do{e = random(2,9);} while(d == e);
+              f = Math.min(d,e);
+              
+              output = a+"x^"+d+" + "+b+"x^"+e;
+              answer = "\\(";
+              if(c != 1){answer+=c;}
+              answer+="x^"+f+"("+a/c;
+              if((d-f)!=0){answer+="x^"+(d-f);}
+              answer+=" + "+(b/c);
+              if((e-f)!=0){answer+="x^"+(e-f);}
+              answer+=")\\)";
+                           
+              break;
+              
+              // trinomial all x
+              case 1:
+              a = random(2,20); b = random(2,20); c = random(2,20);
+              d = gcd(a,gcd(b,c));
+              
+              e = random(2,9); do{f = random(2,9);} while(e == f);
+              do{g = random(1,9);} while(g == f || g == e);
+              h = Math.min(e,f,g);
+              
+              output = a+"x^"+e+" + "+b+"x^"+f+" + "+c+"x^"+g;
+              answer = "\\(";
+              if(d != 1){answer+=d;}
+              answer+="x^"+h+"("+a/d;
+              if((e-h)!=0){answer+="x^"+(e-h);}
+              answer+=" + "+(b/d);
+              if((f-h)!=0){answer+="x^"+(f-h);}
+              answer+=" + "+(c/d);
+              if((g-h)!=0){answer+="x^"+(g-h);}
+              answer+=")\\)";
+              
+              break;
+              
+              // trinomial x and y
+              case 2:
+              a = random(2,20); b = random(2,20); c = random(2,20);
+              d = gcd(a,gcd(b,c));
+              
+              e = random(2,9); do{f = random(2,9);} while(e == f);
+              do{g = random(1,9);} while(g == f || g == e);
+              h = Math.min(e,f,g);
+              
+              i = random(2,9); do{j = random(2,9);} while(i == j);
+              do{k = random(1,9);} while(k == i || k == j);
+              l = Math.min(i,j,k);
+              
+              output = a+"x^"+e+"y^"+i+" + "+b+"x^"+f+"y^"+j+" + "+c+"x^"+g+"y^"+k;
+              answer = "\\(";
+              if(d != 1){answer+=d;}
+              answer+="x^"+h+"y^"+l+"("+a/d;
+              if((e-h)!=0){answer+="x^"+(e-h);}
+              if((i-l)!=0){answer+="y^"+(i-l);}
+              answer+=" + "+(b/d);
+              if((f-h)!=0){answer+="x^"+(f-h);}
+              if((j-l)!=0){answer+="y^"+(j-l);}
+              answer+=" + "+(c/d);
+              if((g-h)!=0){answer+="x^"+(g-h);}
+              if((k-l)!=0){answer+="y^"+(k-l);}
+              answer+=")\\)";
+              
+              break;
+              
+           }
+           output = "Factor: "+"\\("+clean(output)+"\\)";
+           break;
+           
+           // Factoring Trinomials A = 1
+           case 5:
+
+              b = non_zero_random(-10,10);
+              d = non_zero_random(-10,10);
+              
+              answer = "(x + "+b+")(x + "+d+")";
+              
+              output = "x^2";
+              e = b+d;
+              if(e != 0){output+= " + "+e+"x ";}
+              else{diffOfTwoSquares = true;}
+              output+= " + "+(b*d);
+              output = "Factor: "+"\\("+clean(output)+"\\)";
+              answer = "\\("+clean(answer)+"\\)"; 
+              break;
+		   
+           // Factoring Trinomials A not 1
+           case 6: 
+ 
+              a = non_zero_random(2,5);
+              b = non_zero_random(-10,10);
+              c = non_zero_random(2,5);
+              d = non_zero_random(-10,10);
+              
+              answer1 = "("+a+"x + "+b+")("+c+"x + "+d+")";
+             
+              f = gcd(a,b);
+              g = gcd(c,d);
+              
+              if((g*f)!= 1){
+              
+              answer2 = g*f;
+              
+              if(f == 1){
+                 answer2 += "("+a+"x + "+b+")";
+              } else {
+                answer2 += "("+(a/f)+"x + "+(b/f)+")";
+              }
+              
+              if(g == 1){
+                answer2 +="("+c+"x + "+d+")";
+              } else {
+                answer2 +="("+(c/g)+"x + "+(d/g)+")";
+              }
+              
+              answer2 = "<br>Factored Completely: \\("+clean(answer2)+"\\)";
+              
+              }
+
+              output = (a*c)+"x^2";
+              e = formatDec(b*c+d*a);
+              if(e != 0){output+= " + "+e+"x ";}
+              output+= " + "+b*d;
+              output = "Factor: "+"\\("+clean(output)+"\\)";
+              answer = "\\("+clean(answer1)+"\\)"+answer2;
+           
+           break;
+
+       }
+       
+       var videoLinks = ["https://www.youtube.com/watch?v=YmMBCGJGtMk",
+                         "https://www.youtube.com/watch?v=UxQ-BxhY73E",
+                         "https://www.youtube.com/watch?v=4TiJ62KpXQI",
+                         "https://www.youtube.com/watch?v=3cJANpW1Cpk",
+                         "https://www.youtube.com/watch?v=uUdJnAwkxEM",
+                         "https://www.youtube.com/watch?v=NaM_hOJLai8"];
+       
+       if(videoLinks[type-1].length != 0){ 
+         if(diffOfTwoSquares){ 
+            // if two squares, show that video
+            $("#videoLink"). attr("href", "https://www.youtube.com/watch?v=oIHk8wCb8YU");
+         }
+         else{
+            $("#videoLink"). attr("href", videoLinks[type-1]);
+         }
+         $('#video-button').show();
+       }
+       else{
+         $('#video-button').hide();
+       }
+       
+       $("#generatedoutput").html(output);
+       $("#answer").html(answer);
+       renderMathInElement(document.body);
+       //MathJax.Hub.queue.Push(["Typeset",MathJax.Hub,"generatedoutput"]);
+       //MathJax.Hub.queue.Push(["Typeset",MathJax.Hub,"answer"]);
+	}
+        
+    // function to rearrange the pieces of a polynomial
+    function mix(termArray){
+       
+       var output = "";
+       
+       if(termArray.length == 0){
+            
+            output = "0";
+            
+       }
+       else{
+       
+          var terms = shuffle(termArray);
+          
+          output = terms[0];
+          
+          for(var i = 1; i < terms.length; i++){
+              
+              output += " + "+terms[i];
+          
+          }
+          
+       }
+       
+       return output;
+    }
+    
+    function shuffle(array) {
+       array.sort(() => Math.random() - 0.5);
+       return array;
+    }
+
+</script>
