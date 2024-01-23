@@ -270,11 +270,11 @@
               b = non_zero_random(-10,10);
               d = non_zero_random(-10,10);
               
-              answer = "(x + "+b+")(x + "+d+")";
+              answer = "("+var1+" + "+b+")("+var1+" + "+d+")";
               
-              output = "x^2";
+              output = var1+"^2";
               e = b+d;
-              if(e != 0){output+= " + "+e+"x ";}
+              if(e != 0){output+= " + "+e+var1;}
               else{diffOfTwoSquares = true;}
               output+= " + "+(b*d);
               output = "Factor: "+"\\("+clean(output)+"\\)";
@@ -289,7 +289,7 @@
               c = non_zero_random(2,5);
               d = non_zero_random(-10,10);
               
-              answer1 = "("+a+"x + "+b+")("+c+"x + "+d+")";
+              answer1 = "("+a+var1+" + "+b+")("+c+var1+" + "+d+")";
              
               f = gcd(a,b);
               g = gcd(c,d);
@@ -299,24 +299,24 @@
               answer2 = g*f;
               
               if(f == 1){
-                 answer2 += "("+a+"x + "+b+")";
+                 answer2 += "("+a+var1+" + "+b+")";
               } else {
-                answer2 += "("+(a/f)+"x + "+(b/f)+")";
+                answer2 += "("+(a/f)+var1+" + "+(b/f)+")";
               }
               
               if(g == 1){
-                answer2 +="("+c+"x + "+d+")";
+                answer2 +="("+c+var1+" + "+d+")";
               } else {
-                answer2 +="("+(c/g)+"x + "+(d/g)+")";
+                answer2 +="("+(c/g)+var1+" + "+(d/g)+")";
               }
               
               answer2 = "<br>Factored Completely: \\("+clean(answer2)+"\\)";
               
               }
 
-              output = (a*c)+"x^2";
+              output = (a*c)+var1+"^2";
               e = formatDec(b*c+d*a);
-              if(e != 0){output+= " + "+e+"x ";}
+              if(e != 0){output+= " + "+e+var1;}
               output+= " + "+b*d;
               output = "Factor: "+"\\("+clean(output)+"\\)";
               answer = "\\("+clean(answer1)+"\\)"+answer2;
