@@ -108,34 +108,34 @@
               // 1 x 1
               case 0: 
               
-              output = "("+a+"x^"+e+")("+b+"x^"+f+")";
-              answer = (a*b)+"x^{"+(e+f)+"}";
+              output = "("+a+var1+"^"+e+")("+b+var1+"^"+f+")";
+              answer = (a*b)+var1+"^{"+(e+f)+"}";
               
               break;
               
               // 1 x 2
               case 1: 
               
-              output = "("+a+"x^"+e+")("+b+"x^"+f+" + "+c+"x^"+g+")"; 
-              answer = (a*b)+"x^{"+(e+f)+"} + "+(a*c)+"x^{"+(e+g)+"}";
+              output = "("+a+var1+"^"+e+")("+b+var1+"^"+f+" + "+c+var1+"^"+g+")"; 
+              answer = (a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"}";
               
               break;
               
               // 1 x 3
               case 2: 
               
-              output = "("+a+"x^"+e+")("+b+"x^"+f+" + "+c+"x^"+g+" + "+d+"x^"+h+")";
-              answer = (a*b)+"x^{"+(e+f)+"} + "+(a*c)+"x^{"+(e+g)+"} + "+(a*d)+"x^{"+(e+h)+"}";
+              output = "("+a+var1+"^"+e+")("+b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h+")";
+              answer = (a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"} + "+(a*d)+var1+"^{"+(e+h)+"}";
               
               break;
               
               // 2 x 2
               case 3: 
-              output = "("+mix([a+"x",b])+")";
-              output+= "("+mix([c+"x",d])+")";
+              output = "("+mix([a+var1,b])+")";
+              output+= "("+mix([c+var1,d])+")";
               
               e = b*c+d*a;
-              answer = (a*c)+"x^2 + "+e+"x  + "+(b*d);
+              answer = (a*c)+var1+"^2 + "+e+var1+" + "+(b*d);
               break;
 
            }
