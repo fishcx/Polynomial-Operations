@@ -158,8 +158,8 @@
               do{g = random(2,9);}while(g ==f || g == e);
               do{h = random(2,9);}while(h == g || h == e || h == f);
               
-              output = "("+(a*b)+"x^{"+(e+f)+"} + "+(a*c)+"x^{"+(e+g)+"} + "+(a*d)+"x^{"+(e+h)+"})÷("+a+"x^"+e+")";
-              answer = b+"x^"+f+" + "+c+"x^"+g+" + "+d+"x^"+h;
+              output = "("+(a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"} + "+(a*d)+var1+"^{"+(e+h)+"})÷("+a+var1+"^"+e+")";
+              answer = b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h;
               
               answer = "\\("+clean(answer)+"\\)";
               break;
@@ -174,8 +174,8 @@
               do{g = random(2,9);}while(g ==f || g == e);
               do{h = random(2,9);}while(h == g || h == e || h == f);
               
-              output = "\\cfrac{"+a*b+"x^{"+(e+f)+"} + "+a*c+"x^{"+(e+g)+"} + "+a*d+"x^{"+(e+h)+"}}{"+a+"x^"+e+"}";
-              answer = b+"x^"+f+" + "+c+"x^"+g+" + "+d+"x^"+h;
+              output = "\\cfrac{"+a*b+var1+"^{"+(e+f)+"} + "+a*c+var1+"^{"+(e+g)+"} + "+a*d+var1+"^{"+(e+h)+"}}{"+a+var1+"^"+e+"}";
+              answer = b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h;
               
               answer = "\\("+clean(answer)+"\\)";
               break;
