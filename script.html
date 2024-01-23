@@ -55,6 +55,10 @@
        $("#generatedoutput").html("");
        $("#answer").html("");
        
+       var var1 = pickVar();
+       var var2 = "";
+       do{ var2 = pickVar();} while (var1 == var2);
+
        switch(type) {
            // Adding and Subtracting
            case 1: 
@@ -72,14 +76,14 @@
               
               // adding trinomials
               case 0:
-              output = "("+mix([a+"x^2",b + "x",c])+") + ("+mix([d+"x^2",e + "x",f])+")";
-              answer = (a+d)+"x^2 + "+(b+e)+"x  + "+(c+f);
+              output = "("+mix([a+var1+"^2",b + var1,c])+") + ("+mix([d+var1+"^2",e + var1,f])+")";
+              answer = (a+d)+var1+"^2 + "+(b+e)+var1+" + "+(c+f);
               break;
               
               // subtracting trinomials
               case 1:
-              output = "("+mix([a+"x^2",b + "x",c])+") - ("+mix([d+"x^2",e + "x",f])+")";
-              answer = (a-d)+"x^2 + "+(b-e)+"x  + "+(c-f);
+              output = "("+mix([a+var1+"^2",b + var1,c])+") - ("+mix([d+var1+"^2",e + var1,f])+")";
+              answer = (a-d)+var1+"^2 + "+(b-e)+var1+" + "+(c-f);
               break;
               
            }
@@ -376,6 +380,13 @@
        return output;
     }
     
+    function pickVar() {
+      var result           = '';
+      var characters       = 'abcdfghjkmnpqrvwxyz';
+      var charactersLength = characters.length;
+      return characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
     function shuffle(array) {
        array.sort(() => Math.random() - 0.5);
        return array;
