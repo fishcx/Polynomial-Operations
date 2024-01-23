@@ -198,18 +198,18 @@
               d = random(2,9); do{e = random(2,9);} while(d == e);
               f = Math.min(d,e);
               
-              output = a+"x^"+d+" + "+b+"x^"+e;
+              output = a+var1+"^"+d+" + "+b+var1+"^"+e;
               answer = "\\(";
               if(c != 1){answer+=c;}
-              answer+="x^"+f+"("+a/c;
-              if((d-f)!=0){answer+="x^"+(d-f);}
+              answer+=var1+"^"+f+"("+a/c;
+              if((d-f)!=0){answer+=var1+"^"+(d-f);}
               answer+=" + "+(b/c);
-              if((e-f)!=0){answer+="x^"+(e-f);}
+              if((e-f)!=0){answer+=var1+"^"+(e-f);}
               answer+=")\\)";
                            
               break;
               
-              // trinomial all x
+              // trinomial all same var
               case 1:
               a = random(2,20); b = random(2,20); c = random(2,20);
               d = gcd(a,gcd(b,c));
@@ -218,20 +218,20 @@
               do{g = random(1,9);} while(g == f || g == e);
               h = Math.min(e,f,g);
               
-              output = a+"x^"+e+" + "+b+"x^"+f+" + "+c+"x^"+g;
+              output = a+var1+"^"+e+" + "+b+var1+"^"+f+" + "+c+var1+"^"+g;
               answer = "\\(";
               if(d != 1){answer+=d;}
-              answer+="x^"+h+"("+a/d;
-              if((e-h)!=0){answer+="x^"+(e-h);}
+              answer+=var1+"^"+h+"("+a/d;
+              if((e-h)!=0){answer+=var1+"^"+(e-h);}
               answer+=" + "+(b/d);
-              if((f-h)!=0){answer+="x^"+(f-h);}
+              if((f-h)!=0){answer+=var1+"^"+(f-h);}
               answer+=" + "+(c/d);
-              if((g-h)!=0){answer+="x^"+(g-h);}
+              if((g-h)!=0){answer+=var1+"^"+(g-h);}
               answer+=")\\)";
               
               break;
               
-              // trinomial x and y
+              // trinomial with two different variables
               case 2:
               a = random(2,20); b = random(2,20); c = random(2,20);
               d = gcd(a,gcd(b,c));
@@ -244,18 +244,18 @@
               do{k = random(1,9);} while(k == i || k == j);
               l = Math.min(i,j,k);
               
-              output = a+"x^"+e+"y^"+i+" + "+b+"x^"+f+"y^"+j+" + "+c+"x^"+g+"y^"+k;
+              output = a+var1+"^"+e+var2+"^"+i+" + "+b+var1+"^"+f+var2+"^"+j+" + "+c+var1+"^"+g+var2+"^"+k;
               answer = "\\(";
               if(d != 1){answer+=d;}
-              answer+="x^"+h+"y^"+l+"("+a/d;
-              if((e-h)!=0){answer+="x^"+(e-h);}
-              if((i-l)!=0){answer+="y^"+(i-l);}
+              answer+=var1+"^"+h+var2+"^"+l+"("+a/d;
+              if((e-h)!=0){answer+=var1+"^"+(e-h);}
+              if((i-l)!=0){answer+=var2+"^"+(i-l);}
               answer+=" + "+(b/d);
-              if((f-h)!=0){answer+="x^"+(f-h);}
-              if((j-l)!=0){answer+="y^"+(j-l);}
+              if((f-h)!=0){answer+=var1+"^"+(f-h);}
+              if((j-l)!=0){answer+=var2+"^"+(j-l);}
               answer+=" + "+(c/d);
-              if((g-h)!=0){answer+="x^"+(g-h);}
-              if((k-l)!=0){answer+="y^"+(k-l);}
+              if((g-h)!=0){answer+=var1+"^"+(g-h);}
+              if((k-l)!=0){answer+=var2+"^"+(k-l);}
               answer+=")\\)";
               
               break;
