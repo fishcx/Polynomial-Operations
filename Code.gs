@@ -6,7 +6,7 @@ function doGet(e) {
       .evaluate()
       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
   
-  output.setTitle('Polynomial Operations');
+  output.setTitle('Polynomials');
   
   return output;
  
