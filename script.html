@@ -21,7 +21,7 @@
 
         var type;
         // handles the formatting for selecting any type
-        if($("#type").val()=="any"){type = random(1,6);}
+        if($("#type").val()=="any"){type = random(1,4);}
         else{type = parseInt($("#type").val())}
 
         if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
@@ -142,52 +142,9 @@
            output = "\\("+clean(output)+"\\)";
            answer = "\\("+clean(answer)+"\\)";   
            break;
-		   
-           // Dividing
-           case 3: 
-              
-              switch(random(0,1)){
-              
-              case 0:
-              a = non_zero_random(-10,10);
-              b = non_zero_random(-10,10);
-              c = non_zero_random(-10,10);
-              d = non_zero_random(-10,10);
-              e = random(2,9);
-              do{f = random(2,9);}while(e == f);
-              do{g = random(2,9);}while(g ==f || g == e);
-              do{h = random(2,9);}while(h == g || h == e || h == f);
-              
-              output = "("+(a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"} + "+(a*d)+var1+"^{"+(e+h)+"})÷("+a+var1+"^"+e+")";
-              answer = b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h;
-              
-              answer = "\\("+clean(answer)+"\\)";
-              break;
-              
-              case 1:
-              a = non_zero_random(-10,10);
-              b = non_zero_random(-10,10);
-              c = non_zero_random(-10,10);
-              d = non_zero_random(-10,10);
-              e = random(2,9);
-              do{f = random(2,9);}while(e == f);
-              do{g = random(2,9);}while(g ==f || g == e);
-              do{h = random(2,9);}while(h == g || h == e || h == f);
-              
-              output = "\\cfrac{"+a*b+var1+"^{"+(e+f)+"} + "+a*c+var1+"^{"+(e+g)+"} + "+a*d+var1+"^{"+(e+h)+"}}{"+a+var1+"^"+e+"}";
-              answer = b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h;
-              
-              answer = "\\("+clean(answer)+"\\)";
-              break;
-              
-              
-              }
-           output = "\\("+clean(output)+"\\)";   
-           break;
-		   
            
            // Factoring GCF
-           case 4: 
+           case 3: 
               switch(random(0,2)){
         
               // binomial
@@ -265,7 +222,7 @@
            break;
            
            // Factoring Trinomials A = 1
-           case 5:
+           case 4:
 
               b = non_zero_random(-10,10);
               d = non_zero_random(-10,10);
@@ -280,9 +237,52 @@
               output = "Factor: "+"\\("+clean(output)+"\\)";
               answer = "\\("+clean(answer)+"\\)"; 
               break;
-		   
-           // Factoring Trinomials A not 1
+          /*
+		       // Dividing
            case 6: 
+              
+              switch(random(0,1)){
+              
+              case 0:
+              a = non_zero_random(-10,10);
+              b = non_zero_random(-10,10);
+              c = non_zero_random(-10,10);
+              d = non_zero_random(-10,10);
+              e = random(2,9);
+              do{f = random(2,9);}while(e == f);
+              do{g = random(2,9);}while(g ==f || g == e);
+              do{h = random(2,9);}while(h == g || h == e || h == f);
+              
+              output = "("+(a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"} + "+(a*d)+var1+"^{"+(e+h)+"})÷("+a+var1+"^"+e+")";
+              answer = b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h;
+              
+              answer = "\\("+clean(answer)+"\\)";
+              break;
+              
+              case 1:
+              a = non_zero_random(-10,10);
+              b = non_zero_random(-10,10);
+              c = non_zero_random(-10,10);
+              d = non_zero_random(-10,10);
+              e = random(2,9);
+              do{f = random(2,9);}while(e == f);
+              do{g = random(2,9);}while(g ==f || g == e);
+              do{h = random(2,9);}while(h == g || h == e || h == f);
+              
+              output = "\\cfrac{"+a*b+var1+"^{"+(e+f)+"} + "+a*c+var1+"^{"+(e+g)+"} + "+a*d+var1+"^{"+(e+h)+"}}{"+a+var1+"^"+e+"}";
+              answer = b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h;
+              
+              answer = "\\("+clean(answer)+"\\)";
+              break;
+              
+              
+              }
+           output = "\\("+clean(output)+"\\)";   
+           break;
+		   
+
+           // Factoring Trinomials A not 1
+           case 7: 
  
               a = non_zero_random(2,5);
               b = non_zero_random(-10,10);
@@ -322,15 +322,14 @@
               answer = "\\("+clean(answer1)+"\\)"+answer2;
            
            break;
-
+             */
        }
        
        var videoLinks = ["https://www.youtube.com/watch?v=YmMBCGJGtMk",
                          "https://www.youtube.com/watch?v=UxQ-BxhY73E",
-                         "https://www.youtube.com/watch?v=4TiJ62KpXQI",
                          "https://www.youtube.com/watch?v=3cJANpW1Cpk",
                          "https://www.youtube.com/watch?v=uUdJnAwkxEM",
-                         "https://www.youtube.com/watch?v=NaM_hOJLai8"];
+                         ""];
        
        if(videoLinks[type-1].length != 0){ 
          if(diffOfTwoSquares){ 
