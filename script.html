@@ -21,7 +21,7 @@
 
         var type;
         // handles the formatting for selecting any type
-        if($("#type").val()=="any"){type = random(1,4);}
+        if($("#type").val()=="any"){type = random(1,5);}
         else{type = parseInt($("#type").val())}
 
         if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
@@ -145,7 +145,7 @@
            
            // Factoring GCF
            case 3: 
-              switch(random(0,2)){
+              switch(random(0,1)){
         
               // binomial
               case 0: 
@@ -188,6 +188,7 @@
               
               break;
               
+              /*
               // trinomial with two different variables
               case 2:
               a = random(2,20); b = random(2,20); c = random(2,20);
@@ -216,7 +217,7 @@
               answer+=")\\)";
               
               break;
-              
+              */
            }
            output = "Factor: "+"\\("+clean(output)+"\\)";
            break;
@@ -237,6 +238,101 @@
               output = "Factor: "+"\\("+clean(output)+"\\)";
               answer = "\\("+clean(answer)+"\\)"; 
               break;
+
+          // Factoring Completely
+          case 5:
+
+            b = non_zero_random(-10,10);
+            d = non_zero_random(-10,10);
+            c = random(2,12);
+            f = random(1,13);
+
+            switch(random(4,4)){
+              
+              // x^3 +bx^2 +cx
+              case 0:
+              answer = var1+"("+var1+" + "+b+")("+var1+" + "+d+")";
+              output = var1+"^3";
+              e = b+d;
+              if(e != 0){output+= " + "+e+var1+"^2";}
+              else{diffOfTwoSquares = true;}
+              output+= " + "+(b*d)+var1;
+              output = "Factor: "+"\\("+clean(output)+"\\)";
+              answer = "\\("+clean(answer)+"\\)"; 
+              break;
+
+              // GCF with trinomial
+              case 1:
+              answer = c+"("+var1+" + "+b+")("+var1+" + "+d+")";
+              output = c+var1+"^2";
+              e = c*(b+d);
+              if(e != 0){output+= " + "+e+var1;}
+              else{diffOfTwoSquares = true;}
+              output+= " + "+(b*d*c);
+              output = "Factor: "+"\\("+clean(output)+"\\)";
+              answer = "\\("+clean(answer)+"\\)"; 
+              break;
+
+              // perfect squares with GCF
+              case 2:
+              answer = c+"("+var1+" + "+f+")("+var1+" - "+f+")";
+              output = c+var1+"^2 - "+(f*f*c);
+              output = "Factor: "+"\\("+clean(output)+"\\)";
+              answer = "\\("+clean(answer)+"\\)"; 
+              break;
+              
+              // perfect squares with GCF (reversed)
+              case 3:
+              answer = c+"("+f+" + "+var1+")("+f+" - "+var1+")";
+              output = (f*f*c)+" - "+c+var1+"^2";
+              output = "Factor: "+"\\("+clean(output)+"\\)";
+              answer = "\\("+clean(answer)+"\\)"; 
+              break;
+
+              // x^4 +bx^2 +c
+              case 4:
+              var answer = "("+var1+"^2 + "+b+")("+var1+"^2 + "+d+")";
+              output = var1+"^4";
+              e = b+d;
+              if(e != 0){output+= " + "+e+var1+"^2";}
+              else{diffOfTwoSquares = true;}
+              output+= " + "+(b*d);
+              output = "Factor: "+"\\("+clean(output)+"\\)";
+
+              var isBsquare = false;
+              var answer2 = "";
+              // check to see if either factor is a difference of squares
+              if(isPerfectSquare(Math.abs(b))&& b<0){
+                isBsquare = true;
+                var sqrtB = Math.sqrt(Math.abs(b));
+                answer2 += "("+var1+" + "+sqrtB+")("+var1+" - "+sqrtB+")";
+              }
+
+              if(isPerfectSquare(Math.abs(d)) && d < 0){
+
+                if(!isBsquare){ answer2 += "("+var1+"^2 + "+b+")";}
+                var sqrtD = Math.sqrt(Math.abs(d));
+                answer2 += "("+var1+" + "+sqrtD+")("+var1+" - "+sqrtD+")";
+              }else{
+
+                  if(isBsquare){
+
+                    answer2 += "("+var1+"^2 + "+d+")";                      
+
+                  }
+
+              }
+
+              if(answer2 != ""){ answer = answer2;}
+
+              answer = "\\("+clean(answer)+"\\)"; 
+
+              break;
+
+            }
+
+          break;  
+
           /*
 		       // Dividing
            case 6: 
@@ -379,6 +475,26 @@
        return output;
     }
     
+    // JavaScript program to find if x is a
+// perfect square.
+ 
+function isPerfectSquare(x)
+    {
+        if (x >= 0) {
+            
+            // Find floating point value of
+            // square root of x.
+            let sr = Math.sqrt(x);
+            
+            // if product of square root
+            // is equal, then
+            // return T/F
+  
+            return ((sr * sr) == x);
+        }
+        return false;
+    }
+
     function pickVar() {
       var result           = '';
       var characters       = 'abcdfghjkmnpqrvwxyz';
