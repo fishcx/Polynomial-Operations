@@ -21,7 +21,7 @@
 
         var type;
         // handles the formatting for selecting any type
-        if($("#type").val()=="any"){type = random(1,5);}
+        if($("#type").val()=="any"){type = random(1,6);}
         else{type = parseInt($("#type").val())}
 
         if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
@@ -333,6 +333,65 @@
 
           break;  
 
+          // rewrite into standard form and determine degree and leading coefficient
+          case 6:
+          output = "Rewrite into standard form, determine the degree, and leading coefficient<br>";
+
+          var exp1 = random(2,5);
+          var exp2 = exp1+random(1,2);
+          var exp3 = exp2+random(1,2);
+          a = non_zero_random(-9,9);
+          b = non_zero_random(-9,9);
+          c = non_zero_random(-9,9);
+          d = non_zero_random(-9,9);
+          e = non_zero_random(-9,9);
+
+          var degree = 0;
+          var leadingCoeff = 0;
+
+          switch(random(0,4)){
+
+            case 0:
+            output += "\\("+clean(mix([a+var1+"^{"+exp3+"}",b+var1+"^{"+exp2+"}",c+var1+"^{"+exp1+"}",d + var1,e]))+"\\)";
+            answer += "\\("+clean(a+var1+"^{"+exp3+"}+"+b+var1+"^{"+exp2+"}+"+c+var1+"^{"+exp1+"}+"+d + var1+"+"+e)+"\\)";
+            degree = exp3;
+            leadingCoeff = a;
+            break;
+            
+            case 1:
+            output += "\\("+clean(mix([a+var1+"^{"+exp3+"}",c+var1+"^{"+exp1+"}",d + var1,e]))+"\\)";
+            answer += "\\("+clean(a+var1+"^{"+exp3+"}+"+c+var1+"^{"+exp1+"}+"+d + var1+"+"+e)+"\\)";
+            degree = exp3;
+            leadingCoeff = a;
+            break;
+
+            case 2:
+            output += "\\("+clean(mix([a+var1+"^{"+exp3+"}",c+var1+"^{"+exp1+"}",d + var1]))+"\\)";
+            answer += "\\("+clean(a+var1+"^{"+exp3+"}+"+c+var1+"^{"+exp1+"}+"+d + var1)+"\\)";
+            degree = exp3;
+            leadingCoeff = a;
+            break;
+
+            case 3:
+            output += "\\("+clean(mix([b+var1+"^{"+exp2+"}",c+var1+"^{"+exp1+"}",d + var1,e]))+"\\)";
+            answer += "\\("+clean(b+var1+"^{"+exp2+"}+"+c+var1+"^{"+exp1+"}+"+d + var1+"+"+e)+"\\)";
+            degree = exp2;
+            leadingCoeff = b;
+            break;
+
+            case 4:
+            output += "\\("+clean(mix([b+var1+"^{"+exp2+"}",c+var1+"^{"+exp1+"}",e]))+"\\)";
+            answer += "\\("+clean(b+var1+"^{"+exp2+"}+"+c+var1+"^{"+exp1+"}+"+e)+"\\)";
+            degree = exp2;
+            leadingCoeff = b;
+            break;
+
+          }
+
+          answer += "<br>Degree: "+degree+", Leading Coefficient: "+leadingCoeff;
+          
+          break;
+
           /*
 		       // Dividing
            case 6: 
@@ -425,7 +484,8 @@
                          "https://www.youtube.com/watch?v=UxQ-BxhY73E",
                          "https://www.youtube.com/watch?v=3cJANpW1Cpk",
                          "https://www.youtube.com/watch?v=uUdJnAwkxEM",
-                         "https://www.youtube.com/watch?v=qPV5d0liYZU"];
+                         "https://www.youtube.com/watch?v=qPV5d0liYZU",
+                         ""];
        
        if(videoLinks[type-1].length != 0){ 
          if(diffOfTwoSquares){ 
