@@ -21,7 +21,7 @@
 
         var type;
         // handles the formatting for selecting any type
-        if($("#type").val()=="any"){type = random(1,6);}
+        if($("#type").val()=="any"){type = random(1,7);}
         else{type = parseInt($("#type").val())}
 
         if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
@@ -247,7 +247,7 @@
             c = random(2,12);
             f = random(1,13);
 
-            switch(random(0,4)){
+            switch(random(0,3)){
               
               // x^3 +bx^2 +cx
               case 0:
@@ -289,37 +289,47 @@
               answer = "\\("+clean(answer)+"\\)"; 
               break;
 
-              // x^4 +bx^2 +c
-              case 4:
-              var answer = "("+var1+"^2 + "+b+")("+var1+"^2 + "+d+")";
-              output = var1+"^4";
-              e = b+d;
-              if(e != 0){output+= " + "+e+var1+"^2";}
-              else{diffOfTwoSquares = true;}
-              output+= " + "+(b*d);
-              output = "Factor: "+"\\("+clean(output)+"\\)";
+            }
 
-              var isBsquare = false;
-              var answer2 = "";
-              // check to see if either factor is a difference of squares
-              if(isPerfectSquare(Math.abs(b))&& b<0){
-                isBsquare = true;
-                var sqrtB = Math.sqrt(Math.abs(b));
-                answer2 += "("+var1+" + "+sqrtB+")("+var1+" - "+sqrtB+")";
-              }
+          break;  
 
-              if(isPerfectSquare(Math.abs(d)) && d < 0){
+          // Factoring 4th degree trinomial
+          case 7:
 
-                if(!isBsquare){ answer2 += "("+var1+"^2 + "+b+")";}
-                var sqrtD = Math.sqrt(Math.abs(d));
-                answer2 += "("+var1+" + "+sqrtD+")("+var1+" - "+sqrtD+")";
-              }else{
+            b = non_zero_random(-10,10);
+            d = non_zero_random(-10,10);
+            c = random(2,12);
+            f = random(1,13);
 
-                  if(isBsquare){
+            var answer = "("+var1+"^2 + "+b+")("+var1+"^2 + "+d+")";
+            output = var1+"^4";
+            e = b+d;
+            if(e != 0){output+= " + "+e+var1+"^2";}
+            else{diffOfTwoSquares = true;}
+            output+= " + "+(b*d);
+            output = "Factor: "+"\\("+clean(output)+"\\)";
 
-                    answer2 += "("+var1+"^2 + "+d+")";                      
+            var isBsquare = false;
+            var answer2 = "";
+            // check to see if either factor is a difference of squares
+            if(isPerfectSquare(Math.abs(b))&& b<0){
+              isBsquare = true;
+              var sqrtB = Math.sqrt(Math.abs(b));
+              answer2 += "("+var1+" + "+sqrtB+")("+var1+" - "+sqrtB+")";
+           }
 
-                  }
+            if(isPerfectSquare(Math.abs(d)) && d < 0){
+
+              if(!isBsquare){ answer2 += "("+var1+"^2 + "+b+")";}
+              var sqrtD = Math.sqrt(Math.abs(d));
+              answer2 += "("+var1+" + "+sqrtD+")("+var1+" - "+sqrtD+")";
+            }else{
+
+                if(isBsquare){
+
+                   answer2 += "("+var1+"^2 + "+d+")"; 
+
+                }
 
               }
 
@@ -327,11 +337,7 @@
 
               answer = "\\("+clean(answer)+"\\)"; 
 
-              break;
-
-            }
-
-          break;  
+          break; 
 
           // rewrite into standard form and determine degree and leading coefficient
           case 6:
@@ -485,7 +491,8 @@
                          "https://www.youtube.com/watch?v=3cJANpW1Cpk",
                          "https://www.youtube.com/watch?v=uUdJnAwkxEM",
                          "https://www.youtube.com/watch?v=qPV5d0liYZU",
-                         "https://www.youtube.com/watch?v=UgAI-AfyTSM"];
+                         "https://www.youtube.com/watch?v=UgAI-AfyTSM",
+                         "https://www.youtube.com/watch?v=qcDM2vH_zNk"];
        
        if(videoLinks[type-1].length != 0){ 
          if(diffOfTwoSquares){ 
