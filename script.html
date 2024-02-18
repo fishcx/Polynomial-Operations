@@ -547,19 +547,7 @@
  
 function isPerfectSquare(x)
     {
-        if (x >= 0) {
-            
-            // Find floating point value of
-            // square root of x.
-            let sr = Math.sqrt(x);
-            
-            // if product of square root
-            // is equal, then
-            // return T/F
-  
-            return ((sr * sr) == x);
-        }
-        return false;
+        return x > 0 && Math.sqrt(x) % 1 === 0;
     }
 
     function pickVar() {
