@@ -398,6 +398,14 @@
           
           break;
 
+          // Simplifying Radicals
+           case 8:
+           var square = Math.pow(random(3,10),2);
+           var num = random(3,10)*square;
+           output = "Simplify \\(\\sqrt{"+num+"}\\)";
+           answer = "\\("+simplifyRad(num)+"\\)";
+           break;
+
           /*
 		       // Dividing
            case 6: 
@@ -492,7 +500,8 @@
                          "https://www.youtube.com/watch?v=uUdJnAwkxEM",
                          "https://www.youtube.com/watch?v=qPV5d0liYZU",
                          "https://www.youtube.com/watch?v=UgAI-AfyTSM",
-                         "https://www.youtube.com/watch?v=qcDM2vH_zNk"];
+                         "https://www.youtube.com/watch?v=qcDM2vH_zNk",
+                         "https://www.youtube.com/watch?v=ljruH3AhzfI"];
        
        if(videoLinks[type-1].length != 0){ 
          if(diffOfTwoSquares){ 
@@ -511,8 +520,6 @@
        $("#generatedoutput").html(output);
        $("#answer").html(answer);
        renderMathInElement(document.body);
-       //MathJax.Hub.queue.Push(["Typeset",MathJax.Hub,"generatedoutput"]);
-       //MathJax.Hub.queue.Push(["Typeset",MathJax.Hub,"answer"]);
 	}
         
     // function to rearrange the pieces of a polynomial
@@ -560,6 +567,48 @@ function isPerfectSquare(x)
     function shuffle(array) {
        array.sort(() => Math.random() - 0.5);
        return array;
+    }
+
+
+    // simplify radical
+    function simplifyRad(radicand){
+
+          if(isPerfectSquare(Math.abs(radicand))){
+            var square = Math.sqrt(Math.abs(radicand));
+            if(radicand < 0 ){
+              return square+"i";
+            }
+            else{
+              return square;
+            }
+
+          }
+
+           var isqr = Math.floor(Math.sqrt(Math.abs(radicand)));
+           var isqr2 = isqr**2;
+           var front = "";
+           var inside = radicand;
+           
+           while(isqr2 > 1){
+           
+             if((inside % isqr2) === 0){
+
+                front = isqr;
+                inside = inside/isqr2;
+                
+                break;
+             }
+             
+             isqr--;
+             isqr2 = isqr**2;
+           
+           }
+    
+       if(radicand < 0){
+         return front+"\\sqrt{"+(-inside)+"}i";
+       } else{
+         return front+"\\sqrt{"+inside+"}";
+       }
     }
 
 </script>
