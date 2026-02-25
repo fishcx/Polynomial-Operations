@@ -21,7 +21,8 @@
 
         var type;
         // handles the formatting for selecting any type
-        if($("#type").val()=="any"){type = random(1,7);}
+        if($("#type").val()=="mixed"){type = random(1,2);}
+        else if($("#type").val()=="any"){type = random(1,7);}
         else{type = parseInt($("#type").val())}
 
         if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
