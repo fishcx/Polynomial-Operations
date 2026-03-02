@@ -22,6 +22,7 @@
         var type;
         // handles the formatting for selecting any type
         if($("#type").val()=="mixed"){type = random(1,2);}
+        else if($("#type").val()=="mixed2"){type = random(3,6);}
         else if($("#type").val()=="any"){type = random(1,7);}
         else{type = parseInt($("#type").val())}
 
@@ -295,7 +296,7 @@
           break;  
 
           // Factoring 4th degree trinomial
-          case 7:
+          case 6:
 
             b = non_zero_random(-10,10);
             d = non_zero_random(-10,10);
@@ -341,7 +342,7 @@
           break; 
 
           // rewrite into standard form and determine degree and leading coefficient
-          case 6:
+          case 7:
           output = "Rewrite into standard form, determine the degree, and leading coefficient<br>";
 
           var exp1 = random(2,5);
@@ -500,8 +501,8 @@
                          "https://www.youtube.com/watch?v=3cJANpW1Cpk",
                          "https://www.youtube.com/watch?v=uUdJnAwkxEM",
                          "https://www.youtube.com/watch?v=qPV5d0liYZU",
-                         "https://www.youtube.com/watch?v=UgAI-AfyTSM",
                          "https://www.youtube.com/watch?v=qcDM2vH_zNk",
+                         "https://www.youtube.com/watch?v=UgAI-AfyTSM",
                          "https://www.youtube.com/watch?v=ljruH3AhzfI"];
        
        if(videoLinks[type-1].length != 0){ 
