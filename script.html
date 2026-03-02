@@ -21,9 +21,9 @@
 
         var type;
         // handles the formatting for selecting any type
-        if($("#type").val()=="mixed"){type = random(1,2);}
-        else if($("#type").val()=="mixed2"){type = random(3,6);}
-        else if($("#type").val()=="any"){type = random(1,7);}
+        if($("#type").val()=="mixed"){type = random(2,5);}
+        else if($("#type").val()=="mixed2"){type = random(6,9);}
+        else if($("#type").val()=="any"){type = random(1,9);}
         else{type = parseInt($("#type").val())}
 
         if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
@@ -46,8 +46,6 @@
 	});
 	function generate(type){
        
-       
-       
        var output = "";
        var answer = "";
        var answer1 = "";
@@ -62,8 +60,68 @@
        do{ var2 = pickVar();} while (var1 == var2);
 
        switch(type) {
+
+          // rewrite into standard form and determine degree and leading coefficient
+          case 1:
+          output = "Rewrite into standard form, determine the degree, and leading coefficient<br>";
+
+          var exp1 = random(2,5);
+          var exp2 = exp1+random(1,2);
+          var exp3 = exp2+random(1,2);
+          a = non_zero_random(-9,9);
+          b = non_zero_random(-9,9);
+          c = non_zero_random(-9,9);
+          d = non_zero_random(-9,9);
+          e = non_zero_random(-9,9);
+
+          var degree = 0;
+          var leadingCoeff = 0;
+
+          switch(random(0,4)){
+
+            case 0:
+            output += "\\("+clean(mix([a+var1+"^{"+exp3+"}",b+var1+"^{"+exp2+"}",c+var1+"^{"+exp1+"}",d + var1,e]))+"\\)";
+            answer += "\\("+clean(a+var1+"^{"+exp3+"}+"+b+var1+"^{"+exp2+"}+"+c+var1+"^{"+exp1+"}+"+d + var1+"+"+e)+"\\)";
+            degree = exp3;
+            leadingCoeff = a;
+            break;
+            
+            case 1:
+            output += "\\("+clean(mix([a+var1+"^{"+exp3+"}",c+var1+"^{"+exp1+"}",d + var1,e]))+"\\)";
+            answer += "\\("+clean(a+var1+"^{"+exp3+"}+"+c+var1+"^{"+exp1+"}+"+d + var1+"+"+e)+"\\)";
+            degree = exp3;
+            leadingCoeff = a;
+            break;
+
+            case 2:
+            output += "\\("+clean(mix([a+var1+"^{"+exp3+"}",c+var1+"^{"+exp1+"}",d + var1]))+"\\)";
+            answer += "\\("+clean(a+var1+"^{"+exp3+"}+"+c+var1+"^{"+exp1+"}+"+d + var1)+"\\)";
+            degree = exp3;
+            leadingCoeff = a;
+            break;
+
+            case 3:
+            output += "\\("+clean(mix([b+var1+"^{"+exp2+"}",c+var1+"^{"+exp1+"}",d + var1,e]))+"\\)";
+            answer += "\\("+clean(b+var1+"^{"+exp2+"}+"+c+var1+"^{"+exp1+"}+"+d + var1+"+"+e)+"\\)";
+            degree = exp2;
+            leadingCoeff = b;
+            break;
+
+            case 4:
+            output += "\\("+clean(mix([b+var1+"^{"+exp2+"}",c+var1+"^{"+exp1+"}",e]))+"\\)";
+            answer += "\\("+clean(b+var1+"^{"+exp2+"}+"+c+var1+"^{"+exp1+"}+"+e)+"\\)";
+            degree = exp2;
+            leadingCoeff = b;
+            break;
+
+          }
+
+          answer += "<br>Degree: "+degree+", Leading Coefficient: "+leadingCoeff;
+          
+          break;
+
            // Adding and Subtracting
-           case 1: 
+           case 2: 
            
               a = non_zero_random(-10,10);
               b = non_zero_random(-10,10);
@@ -93,8 +151,8 @@
            answer = "\\("+clean(simplifyExpression(answer))+"\\)";
            break;
            
-           // Multiplying
-           case 2:
+           // Multiplying 1 x 1, 1 x 2
+           case 3:
               
               a = non_zero_random(-10,10);
               b = non_zero_random(-10,10);
@@ -105,39 +163,18 @@
               do{g = random(2,9);}while(g ==f || g == e);
               do{h = random(2,9);}while(h == g || h == e || h == f);
               
-              switch(random(0,3)){
+              switch(random(0,1)){
               
               // 1 x 1
               case 0: 
-              
               output = "("+a+var1+"^"+e+")("+b+var1+"^"+f+")";
               answer = (a*b)+var1+"^{"+(e+f)+"}";
-              
               break;
               
               // 1 x 2
               case 1: 
-              
               output = "("+a+var1+"^"+e+")("+b+var1+"^"+f+" + "+c+var1+"^"+g+")"; 
               answer = (a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"}";
-              
-              break;
-              
-              // 1 x 3
-              case 2: 
-              
-              output = "("+a+var1+"^"+e+")("+b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h+")";
-              answer = (a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"} + "+(a*d)+var1+"^{"+(e+h)+"}";
-              
-              break;
-              
-              // 2 x 2
-              case 3: 
-              output = "("+mix([a+var1,b])+")";
-              output+= "("+mix([c+var1,d])+")";
-              
-              e = b*c+d*a;
-              answer = (a*c)+var1+"^2 + "+e+var1+" + "+(b*d);
               break;
 
            }
@@ -145,8 +182,49 @@
            answer = "\\("+clean(answer)+"\\)";   
            break;
            
+           // Multiplying 1 x 3
+           case 4:
+              
+              a = non_zero_random(-10,10);
+              b = non_zero_random(-10,10);
+              c = non_zero_random(-10,10);
+              d = non_zero_random(-10,10);
+              e = random(2,9);
+              do{f = random(2,9);}while(e == f);
+              do{g = random(2,9);}while(g ==f || g == e);
+              do{h = random(2,9);}while(h == g || h == e || h == f);
+        
+              output = "("+a+var1+"^"+e+")("+b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h+")";
+              answer = (a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"} + "+(a*d)+var1+"^{"+(e+h)+"}";
+              
+           output = "\\("+clean(output)+"\\)";
+           answer = "\\("+clean(answer)+"\\)";   
+           break;
+
+           // Multiplying 2 x 2
+           case 5:
+              
+              a = non_zero_random(-10,10);
+              b = non_zero_random(-10,10);
+              c = non_zero_random(-10,10);
+              d = non_zero_random(-10,10);
+              e = random(2,9);
+              do{f = random(2,9);}while(e == f);
+              do{g = random(2,9);}while(g ==f || g == e);
+              do{h = random(2,9);}while(h == g || h == e || h == f);
+   
+              output = "("+mix([a+var1,b])+")";
+              output+= "("+mix([c+var1,d])+")";
+              
+              e = b*c+d*a;
+              answer = (a*c)+var1+"^2 + "+e+var1+" + "+(b*d);
+            
+           output = "\\("+clean(output)+"\\)";
+           answer = "\\("+clean(answer)+"\\)";   
+           break;
+
            // Factoring GCF
-           case 3: 
+           case 6: 
               switch(random(0,1)){
         
               // binomial
@@ -225,7 +303,7 @@
            break;
            
            // Factoring Trinomials A = 1
-           case 4:
+           case 7:
 
               b = non_zero_random(-10,10);
               d = non_zero_random(-10,10);
@@ -242,7 +320,7 @@
               break;
 
           // Factoring Completely
-          case 5:
+          case 8:
 
             b = non_zero_random(-10,10);
             d = non_zero_random(-10,10);
@@ -296,7 +374,7 @@
           break;  
 
           // Factoring 4th degree trinomial
-          case 6:
+          case 9:
 
             b = non_zero_random(-10,10);
             d = non_zero_random(-10,10);
@@ -341,67 +419,8 @@
 
           break; 
 
-          // rewrite into standard form and determine degree and leading coefficient
-          case 7:
-          output = "Rewrite into standard form, determine the degree, and leading coefficient<br>";
-
-          var exp1 = random(2,5);
-          var exp2 = exp1+random(1,2);
-          var exp3 = exp2+random(1,2);
-          a = non_zero_random(-9,9);
-          b = non_zero_random(-9,9);
-          c = non_zero_random(-9,9);
-          d = non_zero_random(-9,9);
-          e = non_zero_random(-9,9);
-
-          var degree = 0;
-          var leadingCoeff = 0;
-
-          switch(random(0,4)){
-
-            case 0:
-            output += "\\("+clean(mix([a+var1+"^{"+exp3+"}",b+var1+"^{"+exp2+"}",c+var1+"^{"+exp1+"}",d + var1,e]))+"\\)";
-            answer += "\\("+clean(a+var1+"^{"+exp3+"}+"+b+var1+"^{"+exp2+"}+"+c+var1+"^{"+exp1+"}+"+d + var1+"+"+e)+"\\)";
-            degree = exp3;
-            leadingCoeff = a;
-            break;
-            
-            case 1:
-            output += "\\("+clean(mix([a+var1+"^{"+exp3+"}",c+var1+"^{"+exp1+"}",d + var1,e]))+"\\)";
-            answer += "\\("+clean(a+var1+"^{"+exp3+"}+"+c+var1+"^{"+exp1+"}+"+d + var1+"+"+e)+"\\)";
-            degree = exp3;
-            leadingCoeff = a;
-            break;
-
-            case 2:
-            output += "\\("+clean(mix([a+var1+"^{"+exp3+"}",c+var1+"^{"+exp1+"}",d + var1]))+"\\)";
-            answer += "\\("+clean(a+var1+"^{"+exp3+"}+"+c+var1+"^{"+exp1+"}+"+d + var1)+"\\)";
-            degree = exp3;
-            leadingCoeff = a;
-            break;
-
-            case 3:
-            output += "\\("+clean(mix([b+var1+"^{"+exp2+"}",c+var1+"^{"+exp1+"}",d + var1,e]))+"\\)";
-            answer += "\\("+clean(b+var1+"^{"+exp2+"}+"+c+var1+"^{"+exp1+"}+"+d + var1+"+"+e)+"\\)";
-            degree = exp2;
-            leadingCoeff = b;
-            break;
-
-            case 4:
-            output += "\\("+clean(mix([b+var1+"^{"+exp2+"}",c+var1+"^{"+exp1+"}",e]))+"\\)";
-            answer += "\\("+clean(b+var1+"^{"+exp2+"}+"+c+var1+"^{"+exp1+"}+"+e)+"\\)";
-            degree = exp2;
-            leadingCoeff = b;
-            break;
-
-          }
-
-          answer += "<br>Degree: "+degree+", Leading Coefficient: "+leadingCoeff;
-          
-          break;
-
           // Simplifying Radicals
-           case 8:
+           case 10:
            var square = Math.pow(random(3,10),2);
            var num = random(3,10)*square;
 
@@ -512,13 +531,16 @@
              */
        }
        
-       var videoLinks = ["https://www.youtube.com/watch?v=YmMBCGJGtMk",
+       var videoLinks = [
+                         "https://www.youtube.com/watch?v=UgAI-AfyTSM", // standard form
+                         "https://www.youtube.com/watch?v=YmMBCGJGtMk", // combining
                          "https://www.youtube.com/watch?v=UxQ-BxhY73E",
+                         "https://www.youtube.com/watch?v=UxQ-BxhY73E",
+                         "https://www.youtube.com/watch?v=UxQ-BxhY73E", // multiply
                          "https://www.youtube.com/watch?v=3cJANpW1Cpk",
                          "https://www.youtube.com/watch?v=uUdJnAwkxEM",
                          "https://www.youtube.com/watch?v=qPV5d0liYZU",
                          "https://www.youtube.com/watch?v=qcDM2vH_zNk",
-                         "https://www.youtube.com/watch?v=UgAI-AfyTSM",
                          "https://www.youtube.com/watch?v=ljruH3AhzfI"];
        
        if(videoLinks[type-1].length != 0){ 
