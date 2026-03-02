@@ -404,8 +404,24 @@
            case 8:
            var square = Math.pow(random(3,10),2);
            var num = random(3,10)*square;
-           output = "Simplify \\(\\sqrt{"+num+"}\\)";
-           answer = "\\("+simplifyRad(num)+"\\)";
+
+            switch(random(0,1)){
+
+              // no coefficient
+              case 0:
+              output = "Simplify \\(\\sqrt{"+num+"}\\)";
+              answer = "\\("+simplifyRad(num,1)+"\\)";
+              break;
+
+              // coefficient
+              case 1:
+              var c = random(2,15);
+              output = "Simplify \\("+c+"\\sqrt{"+num+"}\\)";
+              answer = "\\("+simplifyRad(num,c)+"\\)";
+              break;
+
+            }
+           
            break;
 
           /*
@@ -573,7 +589,7 @@ function isPerfectSquare(x)
 
 
     // simplify radical
-    function simplifyRad(radicand){
+    function simplifyRad(radicand,coeff){
 
           if(isPerfectSquare(Math.abs(radicand))){
             var square = Math.sqrt(Math.abs(radicand));
@@ -581,7 +597,7 @@ function isPerfectSquare(x)
               return square+"i";
             }
             else{
-              return square;
+              return square*coeff;
             }
 
           }
@@ -607,9 +623,9 @@ function isPerfectSquare(x)
            }
     
        if(radicand < 0){
-         return front+"\\sqrt{"+(-inside)+"}i";
+         return coeff*front+"\\sqrt{"+(-inside)+"}i";
        } else{
-         return front+"\\sqrt{"+inside+"}";
+         return coeff*front+"\\sqrt{"+inside+"}";
        }
     }
 
