@@ -21,9 +21,9 @@
 
         var type;
         // handles the formatting for selecting any type
-        if($("#type").val()=="mixed"){type = random(2,5);}
-        else if($("#type").val()=="mixed2"){type = random(6,9);}
-        else if($("#type").val()=="any"){type = random(1,9);}
+        if($("#type").val()=="mixed"){type = random(2,4);}
+        else if($("#type").val()=="mixed2"){type = random(5,8);}
+        else if($("#type").val()=="any"){type = random(1,8);}
         else{type = parseInt($("#type").val())}
 
         if(!testing){$("#answer").hide(); $("#show-answer").val("Show Answer");}
@@ -151,7 +151,7 @@
            answer = "\\("+clean(simplifyExpression(answer))+"\\)";
            break;
            
-           // Multiplying 1 x 1, 1 x 2
+           // Multiplying 1 x 1, 1 x 2, or 1 x 3
            case 3:
               
               a = non_zero_random(-10,10);
@@ -163,7 +163,7 @@
               do{g = random(2,9);}while(g ==f || g == e);
               do{h = random(2,9);}while(h == g || h == e || h == f);
               
-              switch(random(0,1)){
+              switch(random(0,2)){
               
               // 1 x 1
               case 0: 
@@ -177,12 +177,18 @@
               answer = (a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"}";
               break;
 
+              // 1 x 3
+              case 2:
+              output = "("+a+var1+"^"+e+")("+b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h+")";
+              answer = (a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"} + "+(a*d)+var1+"^{"+(e+h)+"}";
+              break;
+
            }
            output = "\\("+clean(output)+"\\)";
            answer = "\\("+clean(answer)+"\\)";   
            break;
-           
-           // Multiplying 1 x 3
+
+           // Multiplying 2 x 2
            case 4:
               
               a = non_zero_random(-10,10);
@@ -193,38 +199,30 @@
               do{f = random(2,9);}while(e == f);
               do{g = random(2,9);}while(g ==f || g == e);
               do{h = random(2,9);}while(h == g || h == e || h == f);
-        
-              output = "("+a+var1+"^"+e+")("+b+var1+"^"+f+" + "+c+var1+"^"+g+" + "+d+var1+"^"+h+")";
-              answer = (a*b)+var1+"^{"+(e+f)+"} + "+(a*c)+var1+"^{"+(e+g)+"} + "+(a*d)+var1+"^{"+(e+h)+"}";
-              
-           output = "\\("+clean(output)+"\\)";
-           answer = "\\("+clean(answer)+"\\)";   
-           break;
 
-           // Multiplying 2 x 2
-           case 5:
-              
-              a = non_zero_random(-10,10);
-              b = non_zero_random(-10,10);
-              c = non_zero_random(-10,10);
-              d = non_zero_random(-10,10);
-              e = random(2,9);
-              do{f = random(2,9);}while(e == f);
-              do{g = random(2,9);}while(g ==f || g == e);
-              do{h = random(2,9);}while(h == g || h == e || h == f);
-   
-              output = "("+mix([a+var1,b])+")";
-              output+= "("+mix([c+var1,d])+")";
-              
-              e = b*c+d*a;
-              answer = (a*c)+var1+"^2 + "+e+var1+" + "+(b*d);
+              switch(random(1,1)){
+                
+                // 2 x 2
+                case 0:
+                output = "("+mix([a+var1,b])+")";
+                output+= "("+mix([c+var1,d])+")";
+                e = b*c+d*a;
+                answer = (a*c)+var1+"^2 + "+e+var1+" + "+(b*d);
+                break;
+
+                // 2 x 3
+                case 1:
+                output = `(${mix([a+var1,b])})(${c+var1}^2 + ${d+var1} + ${e})`;
+                answer = `${a*c} ${var1}^3 + ${(a*d+b*c)+var1}^2 + ${(a*e+b*d)+var1} + ${(b*e)}`;
+                break;
+              }
             
            output = "\\("+clean(output)+"\\)";
            answer = "\\("+clean(answer)+"\\)";   
            break;
 
            // Factoring GCF
-           case 6: 
+           case 5: 
               switch(random(0,1)){
         
               // binomial
@@ -303,7 +301,7 @@
            break;
            
            // Factoring Trinomials A = 1
-           case 7:
+           case 6:
 
               b = non_zero_random(-10,10);
               d = non_zero_random(-10,10);
@@ -320,7 +318,7 @@
               break;
 
           // Factoring Completely
-          case 8:
+          case 7:
 
             b = non_zero_random(-10,10);
             d = non_zero_random(-10,10);
@@ -374,7 +372,7 @@
           break;  
 
           // Factoring 4th degree trinomial
-          case 9:
+          case 8:
 
             b = non_zero_random(-10,10);
             d = non_zero_random(-10,10);
@@ -420,7 +418,7 @@
           break; 
 
           // Simplifying Radicals
-           case 10:
+           case 9:
            var square = Math.pow(random(3,10),2);
            var num = random(3,10)*square;
 
@@ -534,7 +532,6 @@
        var videoLinks = [
                          "https://www.youtube.com/watch?v=UgAI-AfyTSM", // standard form
                          "https://www.youtube.com/watch?v=YmMBCGJGtMk", // combining
-                         "https://www.youtube.com/watch?v=UxQ-BxhY73E",
                          "https://www.youtube.com/watch?v=UxQ-BxhY73E",
                          "https://www.youtube.com/watch?v=UxQ-BxhY73E", // multiply
                          "https://www.youtube.com/watch?v=3cJANpW1Cpk",
