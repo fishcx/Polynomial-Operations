@@ -441,6 +441,17 @@
            
            break;
 
+            // Rationalize the Denominator
+            case 10:
+
+              var a,b;
+              if(random(0,1) == 0){ b = random(2,10); }else{ b = 1; }
+              do{ a = random(2,40); } while( isPerfectSquare(a) );
+              output = `Rationalize the denominator: \\(\\cfrac{${b}}{\\sqrt{${a}}}\\)`;
+              answer = simplifyRadFrac(a,b,a);
+
+            break;
+
           /*
 		       // Dividing
            case 6: 
@@ -538,7 +549,8 @@
                          "https://www.youtube.com/watch?v=uUdJnAwkxEM",
                          "https://www.youtube.com/watch?v=qPV5d0liYZU",
                          "https://www.youtube.com/watch?v=qcDM2vH_zNk",
-                         "https://www.youtube.com/watch?v=ljruH3AhzfI"];
+                         "https://www.youtube.com/watch?v=ljruH3AhzfI",
+                         ""];
        
        if(videoLinks[type-1].length != 0){ 
          if(diffOfTwoSquares){ 
@@ -621,9 +633,9 @@ function isPerfectSquare(x)
 
           }
 
-           var isqr = Math.floor(Math.sqrt(Math.abs(radicand)));
+           var isqr = Math.floor(Math.sqrt(Math.abs(radicand))); 
            var isqr2 = isqr**2;
-           var front = "";
+           var front = 1;
            var inside = radicand;
            
            while(isqr2 > 1){
@@ -641,11 +653,85 @@ function isPerfectSquare(x)
            
            }
     
+      if((coeff*front) === 1){
+
+          front = "";
+
+      }else{
+
+        front = coeff*front;
+
+      }
+
        if(radicand < 0){
-         return coeff*front+"\\sqrt{"+(-inside)+"}i";
+         return front+"\\sqrt{"+(-inside)+"}i";
        } else{
-         return coeff*front+"\\sqrt{"+inside+"}";
+         return front+"\\sqrt{"+inside+"}";
        }
+    }
+
+    // simplify radical
+    function simplifyRadFrac(radicand,coeff,denom){
+
+          if(isPerfectSquare(Math.abs(radicand))){
+            var square = Math.sqrt(Math.abs(radicand));
+              return square*coeff;
+          }
+
+           var isqr = Math.floor(Math.sqrt(Math.abs(radicand))); 
+           var isqr2 = isqr**2;
+           var front = 1;
+           var inside = radicand;
+           
+           while(isqr2 > 1){
+           
+             if((inside % isqr2) === 0){
+
+                front = isqr;
+                inside = inside/isqr2;
+                
+                break;
+             }
+             
+             isqr--;
+             isqr2 = isqr**2;
+           
+           }
+    
+      var fracParts = simplifyFracSqrt(coeff*front,denom); 
+
+      if((fracParts[0]) === 1){
+          front = "";
+      }else{
+        front = fracParts[0];
+      }
+
+        if(fracParts[1] === 1){
+          
+          return `\\(${front}\\sqrt{${inside}}\\)`;
+
+        }else{
+
+          return `\\(\\cfrac{${front}\\sqrt{${inside}}}{${fracParts[1]}}\\)`;
+        }
+    }
+
+    // simplify fraction
+    function simplifyFracSqrt(num, denom){
+
+       // if integer, return integer
+       if((num % denom) === 0){
+       
+         return [num/denom,1];
+         
+       }
+       // otherwise, return fraction in simplest form
+       else{
+            var g = gcd(num,denom);
+
+            return [(num/g),(denom/g)];
+        }
+      
     }
 
 </script>
