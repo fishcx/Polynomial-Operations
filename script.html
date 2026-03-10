@@ -444,9 +444,10 @@
             // Rationalize the Denominator
             case 10:
 
-              var a,b;
-              if(random(0,1) == 0){ b = random(2,10); }else{ b = 1; }
-              do{ a = random(2,40); } while( isPerfectSquare(a) );
+              var a,b,c;
+              c = random(2,5);
+              if(random(0,1) == 0){ b = random(1,6)*c; }else{ b = 1; }
+              do{ a = random(2,10)*c; } while( isPerfectSquare(a) );
               output = `Rationalize the denominator and simplify:<br> \\(\\cfrac{${b}}{\\sqrt{${a}}}\\)`;
               answer = simplifyRadFrac(a,b,a);
 
