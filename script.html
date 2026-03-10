@@ -447,7 +447,7 @@
               var a,b;
               if(random(0,1) == 0){ b = random(2,10); }else{ b = 1; }
               do{ a = random(2,40); } while( isPerfectSquare(a) );
-              output = `Rationalize the denominator: \\(\\cfrac{${b}}{\\sqrt{${a}}}\\)`;
+              output = `Rationalize the denominator and simplify:<br> \\(\\cfrac{${b}}{\\sqrt{${a}}}\\)`;
               answer = simplifyRadFrac(a,b,a);
 
             break;
